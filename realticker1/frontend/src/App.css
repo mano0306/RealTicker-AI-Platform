@@ -1,0 +1,58 @@
+/* General Page Styling */
+.App {
+  text-align: center;
+  background-color: #f4f7f6;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+/* Table Container Styling */
+table {
+  background-color: white;
+  margin-top: 20px;
+}
+
+/* Table Row Hover Effect */
+.table-row {
+  transition: background-color 0.3s ease;
+}
+
+.table-row:hover {
+  background-color: #eef6ff !important;
+  transform: scale(1.002);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Loading Spinner Animation */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Table Styling */
+@media (max-width: 768px) {
+  table {
+    width: 100% !important;
+    font-size: 14px;
+  }
+}
+
+/* Analysis Box Animation */
+.analysis-card {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
