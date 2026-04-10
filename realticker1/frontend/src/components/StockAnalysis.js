@@ -51,6 +51,32 @@ const StockAnalysis = ({ data, ticker }) => {
         }
     };
 
+    // --- AI Text Parser Logic ---
+    const getAnalysisText = () => {
+        if (!data.analysis || data.analysis === "Click analyze for AI insights") {
+            return "AI is analyzing the market trends... please wait.";
+        }
+
+        try {
+            // Backend anuppura response-ah JSON-ah mathuroom
+            const parsed = typeof data.analysis === 'string' ? JSON.parse(data.analysis) : data.analysis;
+
+            // Hugging Face output array format-la irukkum [{generated_text: "..."}]
+            if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].generated_text) {
+                const fullText = parsed[0].generated_text;
+                
+                // Prompt-ah thookittu badhil-ah mattum edukka "summary." vechu split pandroom
+                const parts = fullText.split("summary.");
+                return parts.length > 1 ? parts[1].trim() : fullText.trim();
+            }
+            
+            return typeof data.analysis === 'string' ? data.analysis : JSON.stringify(data.analysis);
+        } catch (e) {
+            // Oru vela normal string-ah vandha adhaiye return pannum
+            return data.analysis;
+        }
+    };
+
     return (
         <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '12px', backgroundColor: '#fff' }}>
             <h2 style={{ textAlign: 'center', color: '#333' }}>Market Analysis: {ticker}</h2>
@@ -59,17 +85,15 @@ const StockAnalysis = ({ data, ticker }) => {
                 <Line data={chartData} options={options} />
             </div>
 
-            {/* --- AI Insights Section (Updated) --- */}
+            {/* --- AI Insights Section (Updated & Fixed) --- */}
             <div style={{ padding: '20px', backgroundColor: '#f0fdf4', borderRadius: '8px', borderLeft: '6px solid #22c55e' }}>
                 <h4 style={{ margin: '0 0 10px 0', color: '#166534' }}>🤖 Real-Time AI Analysis (Hugging Face)</h4>
 
                 <p style={{ margin: '0', color: '#333', lineHeight: '1.6', fontWeight: '500' }}>
-                    {/* Backend-la irundhu vara 'analysis' field-ah inga display pandrom */}
-                    {data.analysis ? data.analysis : "AI is analyzing the market trends... please wait."}
+                    {getAnalysisText()}
                 </p>
 
                 <p style={{ marginTop: '15px', fontSize: '11px', color: '#666', fontStyle: 'italic' }}>
-                    {/* Backend disclaimer-ah inga kaatureenga */}
                     {data.disclaimer ? data.disclaimer : "Disclaimer: AI insights are for educational purposes."}
                 </p>
             </div>

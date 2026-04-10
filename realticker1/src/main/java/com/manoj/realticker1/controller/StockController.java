@@ -30,29 +30,33 @@ public class StockController {
     public StockHistory getHistory(@PathVariable String ticker) {
         Stock stock = stockService.getStockByTicker(ticker);
         List<Double> history = (stock != null) ? stock.getHistory() : Collections.emptyList();
-        return new StockHistory(ticker, history, "Click analyze for AI insights");
+
+        // AI Analysis-aiyum sethu return panna:
+        Map<String, String> aiResult = aiService.analyzeStock(ticker, history);
+        String analysis = aiResult.getOrDefault("analysis", "No analysis available");
+
+        return new StockHistory(ticker, history, analysis);
     }
 
-    // 3. POST Analyze
-    @PostMapping("/{ticker}/analyze")
+    // 3. GET Analyze (Indha method-ah dhaan @GetMapping-ah mathirukkom)
+    @GetMapping("/{ticker}/analyze")
     public Map<String, String> triggerAnalysis(@PathVariable String ticker) {
         Stock stock = stockService.getStockByTicker(ticker);
         if (stock != null) {
+            System.out.println("Triggering AI Analysis for: " + ticker);
             return aiService.analyzeStock(ticker, stock.getHistory());
         }
         return Collections.singletonMap("error", "Stock not found");
     }
 
-    // --- CRUD OPERATIONS ADDED BELOW ---
+    // --- CRUD OPERATIONS ---
 
-    // 4. CREATE - Add new stock
     @PostMapping("/add")
     public Map<String, String> addStock(@RequestBody Stock newStock) {
         stockService.addStock(newStock);
         return Collections.singletonMap("message", "Stock " + newStock.getTicker() + " added successfully!");
     }
 
-    // 5. UPDATE - Update existing stock price
     @PutMapping("/{ticker}")
     public Map<String, String> updateStock(@PathVariable String ticker, @RequestBody Stock updatedData) {
         boolean success = stockService.updateStock(ticker, updatedData);
@@ -62,7 +66,6 @@ public class StockController {
         return Collections.singletonMap("error", "Stock not found");
     }
 
-    // 6. DELETE - Remove a stock
     @DeleteMapping("/{ticker}")
     public Map<String, String> deleteStock(@PathVariable String ticker) {
         boolean success = stockService.deleteStock(ticker);
