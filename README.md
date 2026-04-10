@@ -1,88 +1,176 @@
-RealTicker - AI-Powered Stock Insights Platform
+# 🚀 RealTicker - AI-Powered Stock Insights Platform
 
-Overview::
+## 📌 Overview
 
-RealTicker is a full-stack application developed for the SORIM AI Hackathon Technical Assessment. The platform provides users with real-time stock price visualization and leverages Large Language Models (LLMs) to provide human-readable investment insights.
+**RealTicker** is a full-stack application built for the **SORIM AI Hackathon Technical Assessment**.
+It combines real-time stock data with **AI-powered insights** to help users understand market trends in a simple, human-readable way.
 
-Key Objectives:
+The platform leverages **Large Language Models (LLMs)** to transform complex financial data into beginner-friendly investment guidance.
 
-1.Market Tracking: Fetches daily stock price data and identifies the Top 10 stocks based on volume and growth.
+---
 
-2.AI Analysis: Uses a Hugging Face LLM to analyze 6 months of historical price trends.
+## 🎯 Key Objectives
 
-Investment Guidance: Provides trend identification, risk levels, and suggested actions for beginners.
+* 📊 **Market Tracking**
+  Fetch daily stock data and identify **Top 10 stocks** based on volume and growth.
 
+* 🤖 **AI Analysis**
+  Analyze **6 months of historical data** using a Hugging Face LLM.
 
+* 💡 **Investment Guidance**
+  Provide:
 
-Tech Stack:
+  * Trend Identification (Upward / Downward)
+  * Risk Level (Low / Medium / High)
+  * Suggested Actions for beginners
 
-Frontend: React.js
-Backend: Java (Spring Boot)
-AI Integration: Hugging Face Inference API
-LLM Used: mistralai/Mistral-7B-Instruct-v0.3
+---
 
+## 🏗️ System Architecture
 
+### 1. Client Layer
 
-Core Features:
+* Built with **React.js**
+* Handles UI, user interaction, and data visualization
 
-1.Top 10 Stocks Dashboard: Displays Ticker, Company Name, Current Price, Change %, and Volume.
-2.Interactive Charting: Visual representation of 6 months of historical data.
-3.AI-Generated Insights: Detailed trend analysis (Upward/Downward), Risk Level assessment, and Suggested Actions.
-4.Professional Disclaimer: "This is AI-generated analysis and not financial advice."
+### 2. Server Layer
 
+* Built with **Spring Boot (Java)**
+* Manages business logic and API communication
 
+### 3. AI Layer
 
-API Design:
+* Uses **Hugging Face Inference API**
+* Powered by **Mistral-7B-Instruct-v0.3**
+* Generates intelligent financial insights
 
-/api/stocks/top10	               GET	   Fetches the Top 10 performing stocks
+---
 
-/api/stocks/{ticker}/history	   GET    	Fetches 6 months history for a specific ticker
+## 🛠️ Tech Stack
 
-/api/stocks/{ticker}/analyze	   GET/POST	   Triggers Hugging Face AI to analyze trends
+| Layer     | Technology                         |
+| --------- | ---------------------------------- |
+| Frontend  | React.js                           |
+| Backend   | Java (Spring Boot)                 |
+| AI        | Hugging Face Inference API         |
+| LLM Model | mistralai/Mistral-7B-Instruct-v0.3 |
 
+---
 
+## ✨ Core Features
 
-Setup Instructions :
+* 📈 **Top 10 Stocks Dashboard**
 
-Prerequisites:
+  * Ticker
+  * Company Name
+  * Current Price
+  * Change %
+  * Volume
 
-Java 17+
+* 📊 **Interactive Charting**
 
-Node.js & npm
+  * Visualize 6 months of historical stock data
 
-Hugging Face Access Token
+* 🧠 **AI-Generated Insights**
 
+  * Trend Analysis (Upward / Downward)
+  * Risk Level Assessment
+  * Suggested Investment Actions
 
+* ⚠️ **Professional Disclaimer**
 
-Backend Setup:
+  > This is AI-generated analysis and not financial advice.
 
-Navigate to the realticker1 directory.
+---
 
-Open src/main/resources/application.properties.
+## 🔗 API Endpoints
 
-Add your Hugging Face Token: huggingface.token=your_token_here
+| Endpoint                       | Method     | Description                    |
+| ------------------------------ | ---------- | ------------------------------ |
+| `/api/stocks/top10`            | GET        | Fetch Top 10 performing stocks |
+| `/api/stocks/{ticker}/history` | GET        | Get 6-month historical data    |
+| `/api/stocks/{ticker}/analyze` | GET / POST | Generate AI-based analysis     |
 
-Run the Spring Boot application: mvn spring-boot:run
+---
 
+## ⚙️ Setup Instructions
 
+### ✅ Prerequisites
 
+* Java 17+
+* Node.js & npm
+* Hugging Face Access Token
 
-Frontend Setup:
-Navigate to the frontend directory.
+---
 
-Install dependencies:npm install
+### 🔧 Backend Setup
 
-Start the React development server: npm start
+```bash
+cd realticker1
+```
 
+1. Open:
 
+```
+src/main/resources/application.properties
+```
 
+2. Add your Hugging Face token:
 
-Submission Details :
+```properties
+huggingface.token=your_token_here
+```
 
-Developer: Manojkumar
+3. Run the application:
 
+```bash
+mvn spring-boot:run
+```
 
-Task: Full-Stack AI Integration Assessment 
+---
+
+### 🎨 Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+---
+
+## 📌 Project Highlights
+
+* Full-stack integration (React + Spring Boot + AI)
+* Real-world financial use case
+* Clean REST API architecture
+* LLM-powered insights generation
+* Beginner-friendly investment explanations
+
+---
+
+## 👨‍💻 Developer
+
+**Manojkumar**
+
+---
+
+## 🏁 Submission Details
+
+* 🏆 **Assessment**: SORIM AI Hackathon
+* 📂 **Category**: Full-Stack AI Integration
+* 🚀 **Project**: RealTicker
+
+---
+
+## 📜 License
+
+This project is developed for educational and assessment purposes.
+
+---
+
+⭐ If you found this project useful, feel free to star the repository!
+
 
 
 Architecture: React Frontend + Spring Boot REST API + Hugging Face AI
